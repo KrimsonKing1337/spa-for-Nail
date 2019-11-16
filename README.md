@@ -1,18 +1,18 @@
 SPA for Nail
 
-###Install
+### Install
 
 ```
 npm i -g stylelint eslint lint-staged
 npm i
 ```
 
-###Start webpack dev-server
+### Start webpack dev-server
 ```
 npm run start:dev
 ```
 
-###Make build
+### Make build
 ```
 npm run build
 ```
