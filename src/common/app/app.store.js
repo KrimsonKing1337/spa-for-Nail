@@ -2,6 +2,8 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
 
+import addUuidToArray from '@/common/helpers/addUuidToArray.js';
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -11,24 +13,33 @@ export default new Vuex.Store({
   },
 
   mutations: {
-    posts(state, value) {
+    SET_POSTS(state, value) {
       state.posts = value;
     },
-    users(state, value) {
+    SET_USERS(state, value) {
       state.users = value;
     }
   },
 
+  getters: {
+    posts(state) {
+      return addUuidToArray(state.posts);
+    },
+    users(state) {
+      return addUuidToArray(state.users);
+    }
+  },
+
   actions: {
-    async posts(store) {
+    async GET_POSTS(store) {
       const postsResp = await axios.get('posts.json');
 
-      store.commit('posts', postsResp.data);
+      store.commit('SET_POSTS', postsResp.data);
     },
-    async users(store) {
+    async GET_USERS(store) {
       const usersResp = await axios.get('users.json');
 
-      store.commit('posts', usersResp.data);
+      store.commit('SET_USERS', usersResp.data);
     }
   }
 });
