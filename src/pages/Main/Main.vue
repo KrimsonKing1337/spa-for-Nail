@@ -1,6 +1,6 @@
 <script>
   import Header from '@/components/Header';
-  import Posts from '@/pages/Posts';
+  import Posts from '@/components/Posts';
 
   export default {
     name: 'Main',

@@ -32,12 +32,12 @@ export default new Vuex.Store({
 
   actions: {
     async GET_POSTS(store) {
-      const postsResp = await axios.get('posts.json');
+      const postsResp = await axios.get('/posts.json');
 
       store.commit('SET_POSTS', postsResp.data);
     },
     async GET_USERS(store) {
-      const usersResp = await axios.get('users.json');
+      const usersResp = await axios.get('/users.json');
 
       store.commit('SET_USERS', usersResp.data);
     }
