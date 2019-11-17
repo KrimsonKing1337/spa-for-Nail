@@ -1,6 +1,8 @@
 <script>
   import {mapGetters} from 'vuex';
 
+  import {localStorageGet} from '@/common/helpers/localStorage.js';
+
   import PostSingle from '@/components/PostSingle';
 
   export default {
@@ -15,6 +17,10 @@
         'posts',
         'users'
       ]),
+
+      postsRead() {
+        return localStorageGet('postsRead');
+      }
     },
 
     methods: {
@@ -28,13 +34,16 @@
         const shortDesc = desc.substr(0, 200);
 
         return tooLong ? `${shortDesc}...` : shortDesc;
+      },
+      getReadValue(postId) {
+        return this.postsRead[postId] || false;
       }
     }
   };
 </script>
 
 <template>
-  <div v-if="posts && users" class="posts-wrapper">
+  <div v-if="posts.length > 0 && users.length > 0" class="posts-wrapper">
     <PostSingle
       v-for="postCur in posts"
       :key="postCur.uuid"
@@ -42,6 +51,7 @@
       :desc="getShrinkDesc(postCur.body)"
       :user-name="getUserName(postCur)"
       :post-id="postCur.id"
+      :read="getReadValue(postCur.id)"
     />
   </div>
 </template>

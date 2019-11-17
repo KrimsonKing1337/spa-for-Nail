@@ -1,6 +1,8 @@
 <script>
   import VueTypes from 'vue-types';
 
+  import {localStorageGet, localStorageSet} from '@/common/helpers/localStorage.js';
+
   export default {
     name: 'PostSingle',
 
@@ -8,16 +10,32 @@
       title: VueTypes.string.isRequired,
       desc: VueTypes.string.isRequired,
       userName: VueTypes.string.isRequired,
-      postId: VueTypes.number
+      postId: VueTypes.number,
+      read: VueTypes.boolean,
+    },
+
+    methods: {
+      saveProgress(postId) {
+        localStorageSet('postsRead', {
+          ...localStorageGet('postsRead'),
+            [postId]: true
+        })
+      },
+
+      handleClick(postId) {
+        this.saveProgress(postId);
+      }
     }
   };
 </script>
 
 <template>
-  <div class="post-single-wrapper">
+  <div class="post-single-wrapper" :class="read ? 'read' : ''">
     <div class="title">
       <router-link v-if="postId" :to="`/post/${postId}`">
-        {{ title }}
+        <span @click="handleClick(postId)">
+          {{ title }}
+        </span>
       </router-link>
 
       <span v-else>
@@ -48,6 +66,10 @@
 
     &:nth-child(1) {
       margin-top: 0;
+    }
+
+    &.read {
+      opacity: 0.7;
     }
   }
 
