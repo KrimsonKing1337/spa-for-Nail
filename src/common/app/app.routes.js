@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 import Err404 from 'pages/Err404';
 import Main from 'pages/Main';
 import Post from 'pages/Post';
+import User from 'pages/User';
 
 Vue.use(VueRouter);
 
@@ -25,6 +26,10 @@ export default new VueRouter({
     {
       path: '/post/:id',
       component: Post
+    },
+    {
+      path: '/user/:id',
+      component: User
     }
   ]
 });

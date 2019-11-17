@@ -9,7 +9,8 @@
     props: {
       title: VueTypes.string.isRequired,
       desc: VueTypes.string.isRequired,
-      userName: VueTypes.string.isRequired,
+      name: VueTypes.string.isRequired,
+      userId: VueTypes.number,
       postId: VueTypes.number,
       read: VueTypes.boolean,
     },
@@ -47,13 +48,13 @@
       {{ desc }}
     </div>
 
-    <div class="name">
+    <div v-if="userId !== undefined" class="name">
       <span>
         Автор:
       </span>
 
-      <router-link to="/">
-        {{ userName }}
+      <router-link :to="`/user/${userId}`">
+        {{ name }}
       </router-link>
     </div>
   </div>

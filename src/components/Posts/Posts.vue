@@ -2,6 +2,7 @@
   import {mapGetters} from 'vuex';
 
   import {localStorageGet} from '@/common/helpers/localStorage.js';
+  import {getUserIdByPost, getNameByPost, getShrinkDesc, wasPostRead} from '@/common/helpers/postInfo.js';
 
   import PostSingle from '@/components/PostSingle';
 
@@ -16,27 +17,21 @@
       ...mapGetters([
         'posts',
         'users'
-      ]),
-
-      postsRead() {
-        return localStorageGet('postsRead');
-      }
+      ])
     },
 
     methods: {
-      getUserName(postCur) {
-        const userId = postCur.userId - 1;
-
-        return this.users[userId].username;
+      getUserId(postCur) {
+        return getUserIdByPost(postCur);
+      },
+      getName(postCur) {
+        return getNameByPost(postCur, this.users);
       },
       getShrinkDesc(desc) {
-        const tooLong = desc.length > 200;
-        const shortDesc = desc.substr(0, 200);
-
-        return tooLong ? `${shortDesc}...` : shortDesc;
+        return getShrinkDesc(desc);
       },
-      getReadValue(postId) {
-        return this.postsRead[postId] || false;
+      wasPostRead(postId) {
+        return wasPostRead(postId);
       }
     }
   };
@@ -49,9 +44,10 @@
       :key="postCur.uuid"
       :title="postCur.title"
       :desc="getShrinkDesc(postCur.body)"
-      :user-name="getUserName(postCur)"
+      :name="getName(postCur)"
+      :user-id="getUserId(postCur)"
       :post-id="postCur.id"
-      :read="getReadValue(postCur.id)"
+      :read="wasPostRead(postCur.id)"
     />
   </div>
 </template>
