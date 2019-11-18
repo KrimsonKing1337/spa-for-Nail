@@ -32,10 +32,6 @@
 
 <style scoped lang="scss">
   .user-info-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
     margin-top: 15px;
 
     &:nth-child(1) {

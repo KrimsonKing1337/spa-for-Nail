@@ -1,14 +1,15 @@
 <script>
   import {mapGetters} from 'vuex';
-  import Header from '@/components/Header';
+
   import UserInfo from '@/components/UserInfo';
+  import Main from '@/components/Main';
 
   export default {
     name: 'Users',
 
     components: {
-      UserInfo,
-      Header
+      Main,
+      UserInfo
     },
 
     computed: {
@@ -21,10 +22,8 @@
 </script>
 
 <template>
-  <div class="users-wrapper">
-    <Header />
-
-    <div v-if="posts.length > 0 && users.length > 0" class="users-list">
+  <Main>
+    <div class="users-wrapper">
       <UserInfo
         v-for="userCur in users"
         :key="userCur.uuid"
@@ -33,18 +32,9 @@
         :user-id="userCur.id"
       />
     </div>
-  </div>
+  </Main>
 </template>
 
 <style scoped lang="scss">
-  .users-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
 
-  .users-list {
-    margin-top: 31px;
-  }
 </style>

@@ -1,11 +1,11 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import Err404 from 'pages/Err404';
-import Main from 'pages/Main';
-import Post from 'pages/Post';
-import User from 'components/User';
-import Users from 'pages/Users';
+import Err404 from '@/pages/Err404';
+import Posts from '@/pages/Posts';
+import Post from '@/pages/Post';
+import Users from '@/pages/Users';
+import User from '@/pages/User';
 
 Vue.use(VueRouter);
 
@@ -22,11 +22,11 @@ export default new VueRouter({
     },
     {
       path: '/',
-      component: Main
+      component: Posts
     },
     {
       path: '/posts',
-      component: Main
+      component: Posts
     },
     {
       path: '/post/:id',

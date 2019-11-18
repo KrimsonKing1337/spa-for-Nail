@@ -34,5 +34,7 @@
 </template>
 
 <style scoped lang="scss">
-
+  .header {
+    margin-bottom: 31px;
+  }
 </style>

@@ -2,9 +2,14 @@
   import VueTypes from 'vue-types';
 
   import {localStorageGet, localStorageSet} from '@/common/helpers/localStorage.js';
+  import Main from '@/components/Main';
 
   export default {
-    name: 'PostSingle',
+    name: 'PostDetail',
+
+    components: {
+      Main
+    },
 
     props: {
       title: VueTypes.string.isRequired,
@@ -13,6 +18,7 @@
       userId: VueTypes.number,
       postId: VueTypes.number,
       read: VueTypes.boolean,
+      showNav: VueTypes.boolean
     },
 
     methods: {
@@ -31,38 +37,39 @@
 </script>
 
 <template>
-  <div class="post-single-wrapper" :class="read ? 'read' : ''">
-    <div class="title">
-      <router-link v-if="postId" :to="`/post/${postId}`">
-        <span @click="handleClick(postId)">
+  <Main :show-nav="showNav">
+    <div class="post-detail-wrapper" :class="read ? 'read' : ''">
+      <div class="title">
+        <router-link v-if="postId" :to="`/post/${postId}`">
+          <span @click="handleClick(postId)">
+            {{ title }}
+          </span>
+        </router-link>
+
+        <span v-else>
           {{ title }}
         </span>
-      </router-link>
+      </div>
 
-      <span v-else>
-        {{ title }}
-      </span>
+      <div class="desc">
+        {{ desc }}
+      </div>
+
+      <div v-if="userId" class="name">
+        <span>
+          Автор:
+        </span>
+
+        <router-link :to="`/user/${userId}`">
+          {{ name }}
+        </router-link>
+      </div>
     </div>
-
-    <div class="desc">
-      {{ desc }}
-    </div>
-
-    <div v-if="userId" class="name">
-      <span>
-        Автор:
-      </span>
-
-      <router-link :to="`/user/${userId}`">
-        {{ name }}
-      </router-link>
-    </div>
-  </div>
+  </Main>
 </template>
 
 <style scoped lang="scss">
-  .post-single-wrapper {
-    max-width: 600px;
+  .post-detail-wrapper {
     margin-top: 20px;
 
     &:nth-child(1) {

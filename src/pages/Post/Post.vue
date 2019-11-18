@@ -1,15 +1,15 @@
 <script>
   import {mapGetters} from 'vuex';
 
-  import Header from '@/components/Header';
-  import PostSingle from '@/components/PostSingle';
+  import PostDetail from '@/components/PostDetail';
+  import Main from '@/components/Main';
 
   export default {
     name: 'Post',
 
     components: {
-      Header,
-      PostSingle
+      Main,
+      PostDetail
     },
 
     computed: {
@@ -35,25 +35,19 @@
 </script>
 
 <template>
-  <div v-if="posts.length > 0 && users.length > 0" class="post-wrapper">
-    <Header />
-
-    <PostSingle
-      :title="postCur.title"
-      :desc="postCur.body"
-      :user-name="userName"
-      :name="name"
-      :user-id="userId"
-    />
-  </div>
+  <Main>
+    <div class="post-wrapper">
+      <PostDetail
+        :title="postCur.title"
+        :desc="postCur.body"
+        :user-name="userName"
+        :name="name"
+        :user-id="userId"
+      />
+    </div>
+  </Main>
 </template>
 
 <style scoped lang="scss">
-  .post-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding-bottom: 50px;
-  }
+
 </style>

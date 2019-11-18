@@ -1,13 +1,16 @@
 <script>
   import {mapGetters} from 'vuex';
   import {getUserIdByPost, getNameByPost, getShrinkDesc, wasPostRead} from '@/common/helpers/postInfo.js';
-  import PostSingle from '@/components/PostSingle';
+
+  import PostDetail from '@/components/PostDetail';
+  import Main from '@/components/Main';
 
   export default {
     name: 'Posts',
 
     components: {
-      PostSingle
+      Main,
+      PostDetail
     },
 
     computed: {
@@ -35,23 +38,28 @@
 </script>
 
 <template>
-  <div v-if="posts.length > 0 && users.length > 0" class="posts-wrapper">
-    <PostSingle
-      v-for="postCur in posts"
-      :key="postCur.uuid"
-      :title="postCur.title"
-      :desc="getShrinkDesc(postCur.body)"
-      :name="getName(postCur)"
-      :user-id="getUserId(postCur)"
-      :post-id="postCur.id"
-      :read="wasPostRead(postCur.id)"
-    />
-  </div>
+  <Main>
+    <div class="posts-wrapper">
+      <PostDetail
+        v-for="postCur in posts"
+        :key="postCur.uuid"
+        :title="postCur.title"
+        :desc="getShrinkDesc(postCur.body)"
+        :name="getName(postCur)"
+        :user-id="getUserId(postCur)"
+        :post-id="postCur.id"
+        :read="wasPostRead(postCur.id)"
+        :show-nav="false"
+      />
+    </div>
+  </Main>
 </template>
 
 <style scoped lang="scss">
-
  .posts-wrapper {
-   margin-top: 31px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
  }
 </style>
