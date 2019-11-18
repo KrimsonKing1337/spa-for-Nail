@@ -15,7 +15,7 @@
         navItems: addUuidToArray([
           {
             label: 'Авторы',
-            link: '/authors'
+            link: '/users'
           },
           {
             label: 'Статьи',

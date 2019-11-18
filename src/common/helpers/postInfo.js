@@ -20,5 +20,7 @@ export function getShrinkDesc(desc) {
 export function wasPostRead(postId) {
   const postsRead = localStorageGet('postsRead');
 
+  if (!postsRead) return false;
+
   return postsRead[postId] || false;
 }

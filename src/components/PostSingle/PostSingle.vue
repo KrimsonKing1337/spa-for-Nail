@@ -48,7 +48,7 @@
       {{ desc }}
     </div>
 
-    <div v-if="userId !== undefined" class="name">
+    <div v-if="userId" class="name">
       <span>
         Автор:
       </span>

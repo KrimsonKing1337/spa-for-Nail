@@ -1,9 +1,6 @@
 <script>
   import {mapGetters} from 'vuex';
-
-  import {localStorageGet} from '@/common/helpers/localStorage.js';
   import {getUserIdByPost, getNameByPost, getShrinkDesc, wasPostRead} from '@/common/helpers/postInfo.js';
-
   import PostSingle from '@/components/PostSingle';
 
   export default {

@@ -21,11 +21,15 @@
       postCur() {
         return this.posts[this.$route.params.id - 1];
       },
-      userName() {
-        const userId = this.postCur.userId - 1;
-
-        return this.users[userId].username;
+      userId() {
+        return this.postCur.userId - 1;
       },
+      userName() {
+        return this.users[this.userId].username;
+      },
+      name() {
+        return this.users[this.userId].name;
+      }
     },
   };
 </script>
@@ -38,6 +42,8 @@
       :title="postCur.title"
       :desc="postCur.body"
       :user-name="userName"
+      :name="name"
+      :user-id="userId"
     />
   </div>
 </template>

@@ -1,15 +1,16 @@
 <script>
-  import VueTypes from 'vue-types';
   import {mapGetters} from 'vuex';
 
-  import {getNameByPost, getShrinkDesc, wasPostRead} from '@/common/helpers/postInfo.js';
+  import {getShrinkDesc, wasPostRead} from '@/common/helpers/postInfo.js';
 
   import PostSingle from '@/components/PostSingle';
+  import UserInfo from '@/components/UserInfo/UserInfo.vue';
 
   export default {
     name: 'User',
 
     components: {
+      UserInfo,
       PostSingle
     },
 
@@ -43,17 +44,10 @@
 
 <template>
   <div v-if="posts.length > 0 && users.length > 0" class="user-wrapper">
-    <div class="name">
-      Имя: {{ userInfo.name }}
-    </div>
-
-    <div class="username">
-      Псевдоним: {{ userInfo.username }}
-    </div>
-
-    <div class="posts-title">
-      Посты:
-    </div>
+    <UserInfo
+      :name="userInfo.name"
+      :username="userInfo.username"
+    />
 
     <div class="posts-wrapper">
       <PostSingle
@@ -62,6 +56,7 @@
         :title="postCur.title"
         :desc="getShrinkDesc(postCur.body)"
         :name="userInfo.name"
+        :user-id="userInfo.id"
         :post-id="postCur.id"
         :read="wasPostRead(postCur.id)"
       />
@@ -70,5 +65,21 @@
 </template>
 
 <style scoped lang="scss">
+  .user-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 15px;
+  }
 
+  .posts-wrapper {
+    margin-top: 17px;
+  }
+
+  .posts-title {
+    margin-top: 14px;
+    font-size: 24px;
+    text-align: center;
+  }
 </style>
