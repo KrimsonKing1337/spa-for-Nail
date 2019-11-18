@@ -22,13 +22,10 @@
         return this.posts[this.$route.params.id - 1];
       },
       userId() {
-        return this.postCur.userId - 1;
-      },
-      userName() {
-        return this.users[this.userId].username;
+        return this.postCur.userId;
       },
       name() {
-        return this.users[this.userId].name;
+        return this.users[this.userId - 1].name;
       }
     },
   };
@@ -40,9 +37,9 @@
       <PostDetail
         :title="postCur.title"
         :desc="postCur.body"
-        :user-name="userName"
         :name="name"
         :user-id="userId"
+        :show-nav="false"
       />
     </div>
   </Main>
