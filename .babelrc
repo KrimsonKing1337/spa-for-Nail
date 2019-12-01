@@ -1,9 +1,11 @@
 {
   "presets": [
     "@babel/preset-env",
+    "@babel/preset-flow",
     "vue"
   ],
   "plugins": [
+    "transform-flow-strip-types",
     "@babel/plugin-proposal-object-rest-spread",
     "@babel/plugin-transform-modules-commonjs",
     [

@@ -6,6 +6,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const OptimizeCssNanoPlugin = require('@intervolga/optimize-cssnano-plugin');
+const FlowWebpackPlugin = require('flow-webpack-plugin');
 
 const argv = require('yargs').argv;
 const rootPath = resolve(__dirname, '../');
@@ -47,6 +48,9 @@ module.exports = {
     sourceMapFilename: '[name].js.map'
   },
   plugins: [
+    new FlowWebpackPlugin({
+      failOnError: true
+    }),
     new CleanWebpackPlugin(`${rootPath}/build/*`, {
       root: `${rootPath}/build/`,
       exclude: ['.gitkeep'],
@@ -65,7 +69,7 @@ module.exports = {
     ]),
     new webpack.DefinePlugin({
       'ENV': JSON.stringify(env),
-    })
+    }),
   ],
   context: rootPath,
   resolve: {
